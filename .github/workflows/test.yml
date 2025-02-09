@@ -33,7 +33,7 @@ jobs:
             sudo docker rm update_restaurant_service || true
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/update_restaurant_service:latest
             sudo docker run -d --restart always \
-              --env-file /home/ec2-user/.env \
+              --env-file /home/ec2-user/update_restaurant_service/.env \
               -p 3000:3000 \
               --name update_restaurant_service \
               ${{ secrets.DOCKER_USERNAME }}/update_restaurant_service:latest
