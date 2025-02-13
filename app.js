@@ -3,12 +3,20 @@ const express = require('express');
 const WebSocket = require('ws');
 const http = require('http');
 const mongoose = require('mongoose');
+const cors = require('cors');
 const restaurantRoutes = require('./routes/restaurantRoutes');
 
 const app = express();
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+// Configurar CORS
+const corsOptions = {
+  origin: '*', // Permitir cualquier origen, puedes cambiarlo a un dominio específico si es necesario
+  methods: ['GET', 'POST', 'DELETE', 'PUT'], // Métodos permitidos
+  allowedHeaders: ['Content-Type'], // Encabezados permitidos
+};
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/', restaurantRoutes); // Ruta para restaurantes
 
